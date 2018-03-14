@@ -6,29 +6,29 @@ import os
 
 
 def date_converter(date_as_string):
-	""" INPUT FORMAT: Month( .@)Year as a string. ex: 'Jan.@2010' 'Mars @2010' 
-	"""
+    """ INPUT FORMAT: Month( .@)Year as a string. ex: 'Jan.@2010' 'Mars @2010' 
+    """
 
-	dic_corres_month={'Jan.':'01',
-						'Fév.':'02',
-						'Mars':'03',
-						'Avr.':'04',
-						'Mai ':'05', 
-						'Juin':'06', 
-						'Jul.':'07', 
-						'Août':'08',
-						'Sep.':'09',
-						'Oct.':'10',
-						'Nov.':'11',
-						'Déc.':'12'}
+    dic_corres_month={'Jan.':'01',
+                        'Fév.':'02',
+                        'Mars':'03',
+                        'Avr.':'04',
+                        'Mai ':'05', 
+                        'Juin':'06', 
+                        'Jul.':'07', 
+                        'Août':'08',
+                        'Sep.':'09',
+                        'Oct.':'10',
+                        'Nov.':'11',
+                        'Déc.':'12'}
 
-	month=dic_corres_month[date_as_string[:4]]
+    month=dic_corres_month[date_as_string[:4]]
 
-	year=date_as_string.split('@')[1]
+    year=date_as_string.split('@')[1]
 
-	date=str(year+'-'+month+'-01 00:00:00 UTC')
+    date=str(year+'-'+month+'-01 00:00:00 UTC')
 
-	return date
+    return date
 
 
 
