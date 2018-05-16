@@ -26,9 +26,9 @@ for i in jours_ord:
     query = """
     
     ############################## SQL QUERY HERE
-    select a.jour Jour,a.conversion_page_name Conversion_page_name,a.Audience Audience,a.daily_audience Daily_audience,b.daily_uu Daily_uu 
-    from
-    (select jour, conversion_page_name, 
+
+
+    select jour, conversion_page_name, 
     CASE WHEN Audience in (1) THEN 'G0'
     WHEN Audience in (2) THEN 'PEKIN'
     WHEN Audience in (3) THEN 'MEXICO'
@@ -86,40 +86,26 @@ for i in jours_ord:
             --where x.user_id = "g3v3fhppn1SD"
             ))
     where row_num = 1
-    group by jour, conversion_page_name, audience)a
-    inner join
-    (select conversion_page_name, jour, count(*) daily_uu
-    from
-        (SELECT conversion_page_name, date(dh_serv) as jour, user_id
-        FROM [datamining-1184:AXA_ES.wcm_conversion_%s]
-        where 1 = 1 
-        --and user_id = "DEUNgUeCBWMM"
-        and conversion_page_id in ('24', '31', '36')
-        and action_type = "conversion"
-        group by conversion_page_name, jour, user_id
-        )
-    group by conversion_page_name, jour) b
-    on a.jour = b.jour and
-    a.conversion_page_name = b.conversion_page_name
-    order by conversion_page_name, audience
+    group by jour, conversion_page_name, audience
+    order by jour, conversion_page_name, audience
 
 
     ############################## END QUERY
     
-    """ %(target_date_BQ, target_date_BQ, target_date_BQ, target_date_BQ)
+    """ %(target_date_BQ, target_date_BQ, target_date_BQ)
     
-    table_destination_name = 'traffic_composition_by_audience'
-    # print(query)
+    table_destination_name = 'traffic_composition_visits_exposed_20180509'
+    print(query)
     
-    try:
-        table=dataset.table(name=table_destination_name)
-        r=str(random.randint(1,1000000)) # unique JOB ID in BigQuery
-        job = bgclient.run_async_query('%s_%s'% (table_destination_name,r), query) 
-        job.destination = table 
-        job.write_disposition = 'WRITE_APPEND'
-        job.allow_large_results = True
-        job.begin()
-    except Exception as e:
-        print('%s'%e)
+    # try:
+    #     table=dataset.table(name=table_destination_name)
+    #     r=str(random.randint(1,1000000)) # unique JOB ID in BigQuery
+    #     job = bgclient.run_async_query('%s_%s'% (table_destination_name,r), query) 
+    #     job.destination = table 
+    #     job.write_disposition = 'WRITE_APPEND'
+    #     job.allow_large_results = True
+    #     job.begin()
+    # except Exception as e:
+    #     print('%s'%e)
       
-    time.sleep(30)
+    # time.sleep(30)
