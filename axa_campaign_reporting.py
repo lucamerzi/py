@@ -1,19 +1,12 @@
-
-# coding: utf-8
-
-# In[34]:
-
-
 import numpy as np
 import pandas as pd
 from google.cloud import bigquery
 import random
 import time
 import datetime
+import os
 
-
-# In[35]:
-
+os.chdir("Desktop")
 
 #GET THE START DATE
 start_date = (datetime.date.today() - datetime.timedelta(float(7))) # CORRECTION: pd.Timedelta cannot accept np.int64 on python 3.3 or 3.4, however np.float64 does work.
@@ -26,16 +19,6 @@ end_date = (datetime.date.today() - datetime.timedelta(float(1))) # CORRECTION: 
 end_date_str = str(end_date)
 end_date_bq = end_date_str.replace('-','')
 print("I am calculating up to the date: " + end_date_bq)
-
-
-# In[36]:
-
-
-cd Desktop/
-
-
-# In[37]:
-
 
 def fetch_data_local(query):
 
@@ -617,10 +600,6 @@ df_exc_DSP.to_excel(writer, sheet_name="exc_DSP",index=False)
 df_exc_format.to_excel(writer, sheet_name="exc_format",index=False)
 df_exc_publisher.to_excel(writer, sheet_name="exc_publisher",index=False)
 df_UU_format.to_excel(writer, sheet_name="UU_format",index=False)
-
-
-# In[55]:
-
 
 #important to be executed at the end
 writer.close()
