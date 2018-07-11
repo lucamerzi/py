@@ -1,16 +1,11 @@
-# coding: utf-8
-
 import numpy as np
 import pandas as pd
-
 import random
 import time
 import datetime
 import os
-
 import smtplib
 import subprocess
-
 from gcloud import datastore, bigquery, storage
 
 
