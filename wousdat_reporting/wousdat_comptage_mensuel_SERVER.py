@@ -586,7 +586,7 @@ def monitoring_alert (task,receivers):
     
     for receiver in receivers:
         message = 'From: From Data Services <' + sender + '>\nTo: To Client <' + receiver + '>\nSubject: Wousdat monthly Report '+start_new_format+'-'+end_new_format+' \n\n' + task
-        pwd = 'U6QATQsn9rncF$aC'
+        pwd = ''
 
         smtpObj = smtplib.SMTP('smtp.googlemail.com', 587)
         smtpObj.starttls()
