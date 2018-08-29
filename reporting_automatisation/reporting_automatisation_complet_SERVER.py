@@ -623,8 +623,8 @@ def get_filenames(bucket_name):
 
 #setting variables for the different cases (success vs unsuccess)
 
-receivers_success = ['jbougard@weborama.com','lmerzetti@weborama.com', 'diego@weborama.com', 'absaibes@weborama.com', 'fkhalouli@weborama.com']
-receivers_unsuccess = ['jbougard@weborama.com','lmerzetti@weborama.com']
+receivers_success = ['']
+receivers_unsuccess = ['']
 
 message_success = """Hi! Please follow this link to download the AXA ES campaign report from """+start_new_format+""" to """+end_new_format+""":
 
@@ -650,7 +650,7 @@ Lien vers le bucket: https://console.cloud.google.com/storage/browser/axa_es
 """
 
 def monitoring_alert (task,receivers):
-    sender = 'jbougard@weborama.com'
+    sender = ''
     
     for receiver in receivers:
         message = 'From: From Data Services <' + sender + '>\nTo: To Client <' + receiver + '>\nSubject: AXA Weekly Report '+start_new_format+'-'+end_new_format+' \n\n' + task
@@ -658,7 +658,7 @@ def monitoring_alert (task,receivers):
 
         smtpObj = smtplib.SMTP('smtp.googlemail.com', 587)
         smtpObj.starttls()
-        smtpObj.login('jbougard@weborama.com', pwd)
+        smtpObj.login('', pwd)
         smtpObj.sendmail(sender, receiver, message)
         smtpObj.quit()
 
